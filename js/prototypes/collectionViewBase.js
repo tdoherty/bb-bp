@@ -29,6 +29,11 @@ define(function (require) {
           this.listenTo(this.collection, 'remove', this.onRemove);
         }
 
+        //collection synced
+        if (this.onSync) {
+          this.listenTo(this.collection, 'sync', this.onSync);
+        }
+
         //collection reset
         if (this.onReset) {
           this.listenTo(this.collection, 'reset', this.onReset);

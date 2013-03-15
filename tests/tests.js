@@ -19,11 +19,13 @@ require(
     }
   },
   [
-    'simpleViewTests'
+    'simpleViewTests',
+    'collectionViewTests'
   ],
-  function (simpleViewTests) {
+  function (simpleViewTests, collectionViewTests) {
 
     simpleViewTests();
+    collectionViewTests();
 
   }
 );

@@ -4,16 +4,12 @@
 define(function (require) {
 
   //module dependencies
-  var mod = require('backbone');
+  var Backbone = require('backbone');
   var View = require('./simpleView');
-  var fakeServer = require('./fakeServer');
 
   var init = View.prototype.initialize;
-//  var view;
 
   return function () {
-
-//   fakeServer.initialize();
 
     module('simpleView', {
       // This will run before each test in this module.
@@ -28,14 +24,6 @@ define(function (require) {
           [500, { 'Content-Type': 'application/json' },
             JSON.stringify({})]);
 
-        var Model = Backbone.Model.extend({
-          validate: function (attrs, options) {
-            if (!attrs.name) {
-              return "name is required";
-            }
-          }
-        });
-
         var self = this;
         View.prototype.initialize = function () {
           self.spy(this, 'onModelChanged');
@@ -49,6 +37,15 @@ define(function (require) {
 
           init.call(this, arguments);
         };
+
+        var Model = Backbone.Model.extend({
+          validate: function (attrs, options) {
+            if (!attrs.name) {
+              return "name is required";
+            }
+          }
+        });
+
         this.model = new Model();
       },
       teardown: function () {
@@ -94,9 +91,8 @@ define(function (require) {
 
     });
 
-
     test('is not listening', function () {
-      expect(7);
+      expect(8);
       var view = new View({model: this.model});
 
       //close, onClose
@@ -111,13 +107,14 @@ define(function (require) {
       //onModelRequested
       this.model.url = '/asdf';
       this.model.fetch();
-
+      this.server.respond();
       ok(view.onModelRequested.notCalled, 'onModelRequested not called');
       //onModelSynced
-//      ok(view.onModelSynced.calledOnce, 'onModelSynced not called');
+      ok(view.onModelSynced.notCalled, 'onModelSynced not called');
 
       //onModelError
       this.model.save();
+      this.server.respond();
       ok(view.onModelError.notCalled, 'onModelError not called');
 
       //onModelInvalid
@@ -128,6 +125,5 @@ define(function (require) {
       ok(view.onModelDestroyed.notCalled, 'onModelDestroyed not called');
     });
 
-//    fakeServer.dispose();
   };
 });

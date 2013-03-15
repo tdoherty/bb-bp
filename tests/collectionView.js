@@ -4,8 +4,22 @@
 define(function (require) {
 
   //module dependencies
-  var mod = require('');
+  var BaseView = require('../js/prototypes/collectionViewBase');
 
-  //non-module dependencies
-  require('');
+  return BaseView.extend({
+    onAdd: function () {
+    },
+    onRemove: function () {
+    },
+    onReset: function () {
+    },
+    onSort: function () {
+    },
+    onDestroy: function () {
+    },
+    onClose: function () {
+    },
+    onSync: function () {
+    }
+  });
 });
