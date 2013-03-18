@@ -46,12 +46,13 @@ define(function (require) {
     });
 
     test('is model bound', function() {
-      expect(2);
+      expect(4);
 
       this.model.set({
         firstName: 'jimmy',
         lastName: 'james',
-        middleName: 'blueflames'
+        middleName: 'blueflames',
+        education: 'college'
       });
       this.view.render();
       this.modelBinder.bind(this.view.model, this.view.el);
@@ -60,9 +61,13 @@ define(function (require) {
       });
 
       equal(this.view.$('[name="firstName"]').val(), 'jimi', 'firstName updated from model');
+      equal(this.view.$('[name="education"][value="college"]').is(':checked'), true, 'education bound to radio button');
 
-      this.view.$('[name="lastName"]').val('johnson');
-      equal(this.view.$('[name="lastName"]').val(), 'johnson', 'lastName updated from DOM');
+      this.view.$('[name="lastName"]').val('johnson').change();
+      equal(this.model.get('lastName'), 'johnson', 'lastName updated from DOM');
+
+      this.view.$('[name="education"][value="high school"]').prop('checked', true).change();
+      equal(this.model.get('education'), 'high school', 'education updated from DOM');
 
     });
 
