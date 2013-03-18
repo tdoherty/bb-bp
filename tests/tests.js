@@ -20,12 +20,14 @@ require(
   },
   [
     'simpleViewTests',
-    'collectionViewTests'
+    'collectionViewTests',
+    'modelBinderTests'
   ],
-  function (simpleViewTests, collectionViewTests) {
+  function (simpleViewTests, collectionViewTests, modelBinderTests) {
 
     simpleViewTests();
     collectionViewTests();
+    modelBinderTests();
 
   }
 );

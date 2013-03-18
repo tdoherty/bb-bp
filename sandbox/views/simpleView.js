@@ -4,9 +4,15 @@
 define(function (require) {
 
   //module dependencies
-  var BaseView = require('../js/prototypes/viewBase');
+  var BaseView = require('../../js/prototypes/viewBase');
 
   return BaseView.extend({
+
+    events: {
+      'click': 'onViewClicked'
+    },
+    onViewClicked: function () {
+    },
     onModelChanged: function () {
     },
     onModelDestroyed: function () {

@@ -4,7 +4,7 @@
 define(function (require) {
 
   //module dependencies
-  var BaseView = require('../js/prototypes/collectionViewBase');
+  var BaseView = require('../../js/prototypes/collectionViewBase');
 
   return BaseView.extend({
     onAdd: function () {

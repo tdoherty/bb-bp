@@ -5,7 +5,7 @@ define(function (require) {
 
   //module dependencies
   var Backbone = require('backbone');
-  var View = require('./simpleView');
+  var View = require('../sandbox/views/simpleView');
 
   var init = View.prototype.initialize;
 
@@ -26,6 +26,8 @@ define(function (require) {
 
         var self = this;
         View.prototype.initialize = function () {
+
+          //built-in events
           self.spy(this, 'onModelChanged');
           self.spy(this, 'onModelRequested');
           self.spy(this, 'onModelSynced');
@@ -34,6 +36,9 @@ define(function (require) {
           self.spy(this, 'onModelDestroyed');
           self.spy(this, 'onClose');
           self.spy(this, 'close');
+
+          //from the events hash
+          self.spy(this, 'onViewClicked');
 
           init.call(this, arguments);
         };
@@ -54,7 +59,7 @@ define(function (require) {
     });
 
     test('is listening', function() {
-      expect(8);
+      expect(9);
 
       var view = new View({model: this.model});
 
@@ -84,6 +89,10 @@ define(function (require) {
       this.model.destroy();
       ok(view.onModelDestroyed.calledOnce, 'onModelDestroyed called once');
 
+      //onViewClicked
+      view.$el.click();
+      ok(view.onViewClicked.calledOnce, 'onViewClicked called once');
+
       //close, onClose
       view.close();
       ok(view.onClose.calledOnce, 'onClose called once');
@@ -92,7 +101,7 @@ define(function (require) {
     });
 
     test('is not listening', function () {
-      expect(8);
+      expect(9);
       var view = new View({model: this.model});
 
       //close, onClose
@@ -120,9 +129,14 @@ define(function (require) {
       //onModelInvalid
       ok(view.onModelInvalid.notCalled, 'onModelInvalid not called');
       //onModelDestroyed
-      this.model.destroy();
 
+      this.model.destroy();
       ok(view.onModelDestroyed.notCalled, 'onModelDestroyed not called');
+
+      //onViewClicked
+      view.$el.click();
+      ok(view.onViewClicked.notCalled, 'onViewClicked not called');
+
     });
 
   };

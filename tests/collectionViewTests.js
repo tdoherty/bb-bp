@@ -5,7 +5,7 @@ define(function (require) {
 
   //module dependencies
   var Backbone = require('backbone');
-  var View = require('./collectionView');
+  var View = require('../sandbox/views/collectionView');
 
   var init = View.prototype.initialize;
 
