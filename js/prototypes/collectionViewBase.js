@@ -1,5 +1,6 @@
 /**
- * from http://addyosmani.github.com/backbone-fundamentals/#common-problems-solutions
+ * Based on http://addyosmani.github.com/backbone-fundamentals/#common-problems-solutions
+ * - new default events in Backbone 0.9.10 or higher
  */
 define(function (require) {
 
