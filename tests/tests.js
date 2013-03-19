@@ -6,7 +6,8 @@ require(
       'text': '../components/requirejs-text/text',
       'backbone': '../components/backbone/backbone',
       'underscore': '../components/underscore/underscore-min',
-      'sinon': '../components/sinon/sinon-1.6.0'
+      'sinon': '../components/sinon/sinon-1.6.0',
+      'rivets': '../components/rivets/rivets'
     },
     shim: {
       'backbone': {
@@ -21,13 +22,15 @@ require(
   [
     'simpleViewTests',
     'collectionViewTests',
-    'modelBinderTests'
+    'modelBinderTests',
+    'rivetsTests'
   ],
-  function (simpleViewTests, collectionViewTests, modelBinderTests) {
+  function (simpleViewTests, collectionViewTests, modelBinderTests, rivetsTests) {
 
     simpleViewTests();
     collectionViewTests();
     modelBinderTests();
+    rivetsTests();
 
   }
 );
